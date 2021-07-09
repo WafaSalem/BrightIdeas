@@ -1,0 +1,48 @@
+@model Idea
+@{
+    ViewData["Title"] = "Bright Ideas";
+}
+<h1>Hi @ViewBag.CurrentUser.Alias</h1>
+<a href="logout">Logout</a>
+<form asp-action="PostIdea" asp-controller="Home" method="POST">
+        <div>
+        <label asp-for="NewIdea" class="form-label"></label>
+        <input asp-for="NewIdea" class="form-control" required>
+        <span asp-validation-for="NewIdea" class="text-danger"></span>
+        </div>
+        <button type="submit" class="btn btn-primary"> submit</button><br />
+        
+ </form>
+@{
+    foreach (var idea in ViewBag.AllIdeas)
+    {
+        <label for="Idea" class="form-label"><h3><a href="/users/@idea.UserId">@idea.PostedBy.Alias</a> says:</h3></label>
+        
+       
+        <textarea type="text" name="Idea" value="@idea.NewIdea" class="form-control">@idea.NewIdea</textarea>
+        @if(idea.UserId == ViewBag.CurrentUser.UserId)
+            {
+                <a href="/deleteidea/@idea.IdeaId" class="btn btn-danger">Delete</a>
+            }
+        <p>
+        @{
+            bool liked = true;
+            foreach (var like in idea.Likedby)
+            {
+                if (like.UserId == ViewBag.CurrentUser.UserId)
+                    {
+                        liked = false; 
+                    }
+            }
+            if(liked)
+            {
+                <a href="/like/@idea.IdeaId">Like</a>
+            }
+            else
+            {
+                <span>Liked </span>
+            }
+        }
+          <a href="/bright_ideas/@idea.IdeaId">@idea.Likedby.Count People</a> Like this.</p>
+    }
+}

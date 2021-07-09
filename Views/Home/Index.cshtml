@@ -1,0 +1,60 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@model User
+<style>
+        .container{
+            display: flex;
+            justify-content: space-between;
+
+        }
+        .left{
+            padding-right:200px ;
+        }
+        .right{
+            padding-left: 200px;
+            
+        }
+    </style>
+<div >
+    <div class="text-center">
+    <h1 >Welcome</h1>
+    </div>
+    <div class="container">
+        <div class="left">
+    <h3>Register Form</h3>
+    <form asp-action="Register" asp-controller="Home" method="POST">
+        <div>
+            <label asp-for="Name" class="form-label"></label>
+            <input asp-for="Name" class="form-control"/><br />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div>
+            <label asp-for="Alias" class="form-label"></label>
+            <input asp-for="Alias" class="form-control"/><br />
+            <span asp-validation-for="Alias" class="text-danger"></span>
+        </div>
+        <div>
+            <label asp-for="Email" class="form-label"></label>
+            <input asp-for="Email" class="form-control"/><br />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+        <div>
+            <label asp-for="Password" class="form-label"></label>
+            <input asp-for="Password" class="form-control"/><br />
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
+        <div>
+            <label asp-for="Confirm" class="form-label"></label>
+            <input asp-for="Confirm" class="form-control"/><br />
+            <span asp-validation-for="Confirm" class="text-danger"></span>
+        </div>
+        <button type="submit">Submit</button>
+    </form>
+    </div>
+   
+    <div class="right">
+    <partial name="_LoginPartial"></partial>
+    </div>
+    </div>
+</div>
